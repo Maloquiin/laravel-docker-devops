@@ -16,6 +16,11 @@
     * Artisan (from Laravel 9+);
     
 ### Инструкция по запуску сервисов
-* Подготовка
-    * Отредактировать docker-compose.yml и указать все environment в сервисах master и slave
-
+* Отредактировать docker-compose.yml и указать все environment в сервисах master и slave
+   
+* смонтируйте образ composer из Docker в каталоги, которые нужны для вашего проекта Laravel, чтобы избежать издержек глобальной установки Composer
+```Bash 
+docker run --rm -v $(pwd):/app composer install --ignore-platform-reqs
+```
+    
+       
