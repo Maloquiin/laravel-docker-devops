@@ -8,7 +8,6 @@ services:
     image: php:8.2-xml
     container_name: app
     restart: unless-stopped
-    tty: true
     environment:
       SERVICE_NAME: app
       SERVICE_TAGS: dev
@@ -23,7 +22,6 @@ services:
     image: nginx:alpine
     container_name: webserver
     restart: unless-stopped
-    tty: true
     ports:
       - "8000:80"
       - "443:443"
@@ -36,16 +34,15 @@ services:
   slave:
     image: mariadb:10.3
     restart: always
-    tty: true
     container_name: slave
     volumes:
     - slave:/var/lib/mysql
     - ./data/slave/etc/my.cnf:/etc/mysql/my.cnf
     environment:
-      MYSQL_ROOT_PASSWORD: 123
-      MYSQL_DATABASE: main
-      MYSQL_USER: nikolai
-      MYSQL_PASSWORD: 123
+      MYSQL_ROOT_PASSWORD: #EDIT
+      MYSQL_DATABASE: #EDIT
+      MYSQL_USER: #EDIT
+      MYSQL_PASSWORD: #EDIT
     ports:
     - "6060:3306"
     networks:
@@ -54,26 +51,23 @@ services:
   master:
     image: mariadb:10.3
     restart: always
-    tty: true
     container_name: master
     volumes:
     - master:/var/lib/mysql
     - ./data/master/etc/my.cnf:/etc/mysql/my.cnf
     environment:
-      MYSQL_ROOT_PASSWORD: 123
-      MYSQL_DATABASE: main
-      MYSQL_USER: nikolai
-      MYSQL_PASSWORD: 123
+      MYSQL_ROOT_PASSWORD: #EDIT
+      MYSQL_DATABASE: #EDIT
+      MYSQL_USER: #EDIT
+      MYSQL_PASSWORD: #EDIT
     ports:
     - "6061:3306"
     networks:
       - app-network
 
-#Docker Networks
 networks:
   app-network:
     driver: bridge
-#Volumes
 volumes:
   slave:
     driver: local
