@@ -37,7 +37,7 @@
     ```Bash 
     docker run --rm -v $(pwd):/app composer install --ignore-platform-reqs
     ```
-* Выполните команду для запуска контейнера:
+* Выполните команду для запуска сервисов:
 
     ```Bash
     docker-compose up -d
