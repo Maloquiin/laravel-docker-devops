@@ -41,6 +41,18 @@ docker run --rm -v $(pwd):/app composer install --ignore-platform-reqs
 docker-compose up -d
 ```
 
-* 
-    
+* Следующая команда будет генерировать ключ и скопирует его в файл .env, гарантируя безопасность сеансов пользователя и шифрованных данных
+```Bash
+docker-compose exec app php artisan key:generate
+```
        
+* Выполните команду для миграции базы данных
+```Bash
+docker-compose exec app php artisan migrate:fresh --seed;
+```
+
+* Чтобы кэшировать настройки в файле, ускоряющем загрузку приложения, запустите команду:
+```Bash
+docker-compose exec app php artisan config:cache
+```
+
