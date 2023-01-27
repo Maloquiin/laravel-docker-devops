@@ -33,30 +33,31 @@
         * READER_DB_PASSWORD=
    
 * Cмонтируйте образ composer из Docker в каталоги, которые нужны для вашего проекта Laravel, чтобы избежать издержек глобальной установки Composer:
-```Bash 
-docker run --rm -v $(pwd):/app composer install --ignore-platform-reqs
-```
+    ```Bash 
+    docker run --rm -v $(pwd):/app composer install --ignore-platform-reqs
+    ```
 * Выполните команду для запуска контейнера:
-```Bash
-docker-compose up -d
-```
+    ```Bash
+    docker-compose up -d
+    ```
 
 * Следующая команда будет генерировать ключ и скопирует его в файл .env, гарантируя безопасность сеансов пользователя и шифрованных данных:
-```Bash
-docker-compose exec app php artisan key:generate
-```
+    ```Bash
+    docker-compose exec app php artisan key:generate
+    ```
        
 * Выполните команду для миграции базы данных:
-```Bash
-docker-compose exec app php artisan migrate:fresh --seed;
-```
+    ```Bash
+        docker-compose exec app php artisan migrate:fresh --seed;
+    ```
 
 * Чтобы кэшировать настройки в файле, ускоряющем загрузку приложения, запустите команду:
-```Bash
-docker-compose exec app php artisan config:cache
-```
+    ```Bash
+    docker-compose exec app php artisan config:cache
+    ```
 * Теперь нужно настроить репликацию баз данных
     * Подключитесь к бд Master и сделайте дамп, следом выгрузите дамп на бд Slave
+    
     * Подключитесь к бд Master и создайте пользователя для репликации командой:
     ```SQL
     create user 'replicant'@'%' identified by 'replicant';
