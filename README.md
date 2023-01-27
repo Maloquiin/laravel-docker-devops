@@ -17,10 +17,25 @@
     
 ### Инструкция по запуску сервисов
 * Отредактировать docker-compose.yml и указать все environment в сервисах master и slave
+* создать файл ".env" в корне приложения (скопировать в него содержимое из .env.example;
+    * В созданном ".env" указать переменные подключения к базам данных:
+        * WRITER_DB_HOST=ip адрес сервера БД для записи;
+        * WRITER_DB_PORT=порт подключения к БД;
+        * WRITER_DB_DATABASE=имя базы;
+        * WRITER_DB_USERNAME=имя пользователя;
+        * WRITER_DB_PASSWORD=пароль;
+
+        Аналогично указать переменные для подключения к БД чтения:
+        * READER_DB_HOST=
+        * READER_DB_PORT=
+        * READER_DB_DATABASE=
+        * READER_DB_USERNAME=
+        * READER_DB_PASSWORD=
    
 * смонтируйте образ composer из Docker в каталоги, которые нужны для вашего проекта Laravel, чтобы избежать издержек глобальной установки Composer
 ```Bash 
 docker run --rm -v $(pwd):/app composer install --ignore-platform-reqs
 ```
+*
     
        
