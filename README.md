@@ -48,7 +48,7 @@
        
 * Выполните команду для миграции базы данных:
     ```Bash
-        docker-compose exec app php artisan migrate:fresh --seed;
+    docker-compose exec app php artisan migrate:fresh --seed;
     ```
 
 * Чтобы кэшировать настройки в файле, ускоряющем загрузку приложения, запустите команду:
@@ -65,4 +65,34 @@
     * Назначаем привилегии:
     ```SQL
     grant replication slave on *.* to replicant;
+    ```
+    
+    * Подлючаемся к бд Master и проверяем статус (запишите себе куда-нибудь значение file и position):
+    ```SQL
+    show master status;
+    ```
+    * Выполните команду, чтобы узнать ip контейнера master внутри сети:
+    ```Bash
+    docker inspect master | grep IPAddress
+    ```
+    
+    * Подключаемся к бд Slave и выполните следующий запрос:
+    ```SQL
+    change master to     
+    master_host='172.18.0.2',              #EDIT    
+    master_user='replicant',               #EDIT   
+    master_password='replicant',           #EDIT    
+    master_port=3306,     
+    master_log_file='mariadb-bin.000002',  #EDIT   
+    master_log_pos=9212,                   #EDIT
+    master_connect_retry=10,     
+    master_use_gtid=slave_pos;
+    ```
+    * Запустить репликацию:
+    ```SQL
+    start slave; 
+    ```
+    * Проверить статус репликации:
+    ```SQL
+    show slave status \G;
     ```
