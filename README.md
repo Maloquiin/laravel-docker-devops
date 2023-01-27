@@ -32,7 +32,7 @@
         * READER_DB_USERNAME=
         * READER_DB_PASSWORD=
    
-* Cмонтируйте образ composer из Docker в каталоги, которые нужны для вашего проекта Laravel, чтобы избежать издержек глобальной установки Composer:
+* Cмонтируйте образ composer из Docker в каталоги, которые нужны для проекта, чтобы избежать издержек глобальной установки Composer:
 
     ```Bash 
     docker run --rm -v $(pwd):/app composer install --ignore-platform-reqs
