@@ -5,7 +5,7 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-    image: php:8.2-xml
+    image: maloquiin/php
     container_name: app
     restart: unless-stopped
     environment:
